@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+  --primary-font-color: #FFFF;
+  --secondary-font-color: #9E9E9E;
+  --primary-color: #FFC700;
+  --main-bg-color: #525252;
+}
+
+* {
+  color: var(--primary-font-color);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  border: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: var(--main-bg-color);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700;
+}
