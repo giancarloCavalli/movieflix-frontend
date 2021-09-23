@@ -1,9 +1,10 @@
+import { NavLink } from 'react-router-dom';
 import './styles.css';
 
 const Navbar = () => {
   return (
     <div className="navbar-container">
-      <h2>MovieFlix</h2>
+      <NavLink to="/" exact><h2>MovieFlix</h2></NavLink>
     </div>
   )
 }
