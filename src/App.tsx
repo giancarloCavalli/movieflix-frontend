@@ -1,5 +1,5 @@
-import LoginCard from 'components/LoginCard';
 import Navbar from 'components/Navbar';
+import Login from 'pages/Login';
 import './App.css';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <div>
           <Navbar />
-          <LoginCard />
+          <Login />
         </div>
       </header>
     </div>
