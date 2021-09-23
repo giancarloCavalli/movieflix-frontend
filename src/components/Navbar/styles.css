@@ -1,0 +1,9 @@
+.navbar-container {
+  color: #000000;
+  background-color: var(--primary-color);
+  padding: 15px;
+}
+
+.navbar-container h2 {
+  color: #000000;
+}

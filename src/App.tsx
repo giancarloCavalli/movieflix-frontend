@@ -1,3 +1,5 @@
+import LoginCard from 'components/LoginCard';
+import Navbar from 'components/Navbar';
 import './App.css';
 
 function App() {
@@ -5,7 +7,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <h2>HELLO</h2>
+          <Navbar />
+          <LoginCard />
         </div>
       </header>
     </div>
