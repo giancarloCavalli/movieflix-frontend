@@ -1,3 +1,4 @@
+import RatingCard from 'components/RatingCard';
 import './styles.css';
 
 const MoviesDetails = () => {
@@ -11,7 +12,7 @@ const MoviesDetails = () => {
       </div>
 
       <div className="base-card movie-reviews-container">
-
+        <RatingCard />
       </div>
     </div>
   );
