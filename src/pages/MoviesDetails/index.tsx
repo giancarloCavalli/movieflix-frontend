@@ -12,7 +12,9 @@ const MoviesDetails = () => {
       </div>
 
       <div className="base-card movie-reviews-container">
-        <RatingCard />
+        <div className="movie-det-comment"><RatingCard /></div>
+        <div className="movie-det-comment"><RatingCard /></div>
+        <div className="movie-det-comment"><RatingCard /></div>
       </div>
     </div>
   );
