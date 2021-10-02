@@ -1,5 +1,8 @@
+import { AuthContext } from "AuthContext";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { getTokenData } from "utils/auth";
 import { requestBackendLogin } from "utils/requests";
 import { saveAuthData } from "utils/storage";
 
@@ -15,6 +18,8 @@ const LoginCard = () => {
   
   const history = useHistory();
 
+  const { setAuthContextData } = useContext(AuthContext);
+
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
@@ -22,6 +27,10 @@ const LoginCard = () => {
       .then(response => {
         console.log('SUCESSO', response.data);
         saveAuthData(response.data);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData()
+        });
         history.push('/movies');
       })
       .catch(error => {
