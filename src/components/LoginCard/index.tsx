@@ -1,19 +1,32 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
-import { BASE_URL } from "utils/requests";
+import { useHistory } from "react-router";
+import { requestBackendLogin } from "utils/requests";
+import { saveAuthData } from "utils/storage";
 
 import "./styles.css";
 
 type FormData = {
-  email: string,
-  password: string
-}
+  username: string;
+  password: string;
+};
+
 
 const LoginCard = () => {
+  
+  const history = useHistory();
+
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
-    console.log(formData);
+    requestBackendLogin(formData)
+      .then(response => {
+        console.log('SUCESSO', response.data);
+        saveAuthData(response.data);
+        history.push('/movies');
+      })
+      .catch(error => {
+        console.log('ERROR', error)
+      });
   };
 
   return (
@@ -25,10 +38,10 @@ const LoginCard = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
-            {...register("email")}
+            {...register("username")}
             className="base-input"
             type="text"
-            name="email"
+            name="username"
             placeholder="Email"
           />
         </div>
