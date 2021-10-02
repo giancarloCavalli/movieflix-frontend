@@ -13,7 +13,7 @@ export type TokenData = {
   authorities: Role[]
 }
 
-export const isAuthenticated = () => {
+export const isAuthenticated = (): boolean => {
   const authData = getAuthData();
   return (authData && authData?.expires_in > (Date.now() / 1000)) ? true : false;
 }
