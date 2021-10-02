@@ -26,3 +26,14 @@ export const getTokenData = (): TokenData | undefined => {
     return undefined;
   }
 }
+
+export const hasAnyRoles = (roles: Role[]): boolean => {
+  if (roles.length === 0)
+    return false;
+
+  const tokenData = getTokenData();
+  if (tokenData !== undefined)
+    return roles.some(role => tokenData.authorities.includes(role));
+  
+  return false;
+};

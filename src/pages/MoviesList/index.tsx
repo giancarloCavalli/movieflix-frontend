@@ -27,7 +27,7 @@ const MoviesList = () => {
 
   return (
     <div className="movies-list-container">
-      <h2>Tela de listagem de filmes</h2>
+      <h2>Listagem de filmes</h2>
 
       <div className="movies-list-list">
         {page?.content.map((movie) => (
