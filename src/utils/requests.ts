@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 import history from './history';
+import { getAuthData } from './storage';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
 export const LOGIN_URL = '/oauth/token'
@@ -14,6 +15,16 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
 
 const basicHeader = () => `Basic ${window.btoa(CLIENT_ID+':'+CLIENT_SECRET)}`;
+
+export const requestBackend = (config: AxiosRequestConfig) => {
+
+  const headers = config.withCredentials ? {
+    ...config.headers,
+    Authorization: `Bearer ${getAuthData().access_token}`
+  } : config.headers;
+
+  return axios({...config, baseURL: BASE_URL, headers});
+};
 
 export const requestBackendLogin = (loginData: LoginData) => {
   const headers = {

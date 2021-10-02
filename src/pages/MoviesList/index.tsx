@@ -1,13 +1,39 @@
+import { AxiosRequestConfig } from "axios";
+import { useEffect, useState } from "react";
+import { Movie } from "types/movie";
+import { SpringPage } from "types/vendor/spring";
+import { requestBackend } from "utils/requests";
 import "./styles.css";
 
 const MoviesList = () => {
+  const [page, setPage] = useState<SpringPage<Movie>>();
+
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: "GET",
+      url: "/movies",
+      withCredentials: true,
+      params: {
+        page: 0,
+        size: 12,
+      },
+    };
+
+    requestBackend(params).then((response) => {
+      setPage(response.data);
+    });
+  }, []);
+
   return (
     <div className="movies-list-container">
       <h2>Tela de listagem de filmes</h2>
 
       <div className="movies-list-list">
-        <div className="movies-list-item"><a href="/">Acessar /movies/1</a></div>
-        <div className="movies-list-item"><a href="/">Acessar /movies/2</a></div>
+        {page?.content.map((movie) => (
+          <div className="movies-list-item" key={movie.id}>
+            <a href={`/movies/${movie.id}`}>{movie.title}</a>
+          </div>
+        ))}
       </div>
     </div>
   );
