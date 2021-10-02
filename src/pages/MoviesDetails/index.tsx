@@ -1,10 +1,41 @@
+import { AxiosRequestConfig } from 'axios';
 import RatingCard from 'components/RatingCard';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Movie } from 'types/movie';
+import { requestBackend } from 'utils/requests';
 import './styles.css';
 
+type UrlParams = {
+  movieId: string
+}
+
 const MoviesDetails = () => {
+
+  const { movieId } = useParams<UrlParams>();
+
+  const [movie, setMovie] = useState<Movie>();
+
+  useEffect(() => {    
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}`,
+      withCredentials: true
+    };
+
+    requestBackend(params)
+    .then(response => {
+      setMovie(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  }, [movieId]);
+
   return (
     <div className="movie-det-container">
-      <h2>Tela detalhes do filme id: 1</h2>
+      <h2>Detalhes do filme: {movie?.title}</h2>
 
       <div className="base-card movie-rating-includer">
         <div><input className="base-input" type="text" placeholder="Deixe sua avaliação aqui" /></div>
@@ -12,9 +43,9 @@ const MoviesDetails = () => {
       </div>
 
       <div className="base-card movie-reviews-container">
-        <div className="movie-det-comment"><RatingCard /></div>
-        <div className="movie-det-comment"><RatingCard /></div>
-        <div className="movie-det-comment"><RatingCard /></div>
+        {movie?.reviews.map((review) => (
+          <div className="movie-det-comment" key={review.id}><RatingCard review={review} /></div>
+        ))}
       </div>
     </div>
   );

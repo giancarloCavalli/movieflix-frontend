@@ -25,7 +25,6 @@ const LoginCard = () => {
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then(response => {
-        console.log('SUCESSO', response.data);
         saveAuthData(response.data);
         setAuthContextData({
           authenticated: true,

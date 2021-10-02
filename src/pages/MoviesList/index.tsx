@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Movie } from "types/movie";
 import { SpringPage } from "types/vendor/spring";
 import { requestBackend } from "utils/requests";
@@ -31,7 +32,7 @@ const MoviesList = () => {
       <div className="movies-list-list">
         {page?.content.map((movie) => (
           <div className="movies-list-item" key={movie.id}>
-            <a href={`/movies/${movie.id}`}>{movie.title}</a>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </div>
         ))}
       </div>

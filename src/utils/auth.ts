@@ -1,5 +1,4 @@
 import jwtDecode from "jwt-decode";
-import { Token } from "typescript";
 import { getAuthData } from "./storage";
 
 export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER';
