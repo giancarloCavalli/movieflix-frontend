@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import history from './history';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
 export const LOGIN_URL = '/oauth/token'
@@ -27,3 +28,18 @@ export const requestBackendLogin = (loginData: LoginData) => {
 
   return axios({method: 'POST', baseURL: BASE_URL, url: LOGIN_URL, data, headers});
 }
+
+axios.interceptors.request.use(function (config) {
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401 || error.response.status === 403)
+    history.push('/');
+
+  return Promise.reject(error);
+});
