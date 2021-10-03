@@ -7,6 +7,7 @@ import { Movie } from "types/movie";
 import { NewReview } from "types/newReview";
 import { hasAnyRoles } from "utils/auth";
 import { requestBackend } from "utils/requests";
+import { getAuthData } from "utils/storage";
 import "./styles.css";
 
 type UrlParams = {
@@ -26,7 +27,7 @@ const MoviesDetails = () => {
     else {
       const newReview: NewReview = {
         ...formData,
-        userId: 2,
+        userId: getAuthData().userId,
         movieId: parseInt(movieId)
       }
   

@@ -5,7 +5,8 @@ export type LoginResponse = {
   token_type: string;
   refresh_token: string,
   expires_in: number,
-  scope: string
+  scope: string,
+  userId: number
 }
 
 export const saveAuthData = (obj: LoginResponse) => {
